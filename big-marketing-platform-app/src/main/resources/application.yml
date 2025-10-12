@@ -1,0 +1,5 @@
+spring:
+  config:
+    name: big-marketing-platform-app
+  profiles:
+    active: dev
