@@ -21,7 +21,7 @@ class ThreadPoolConfig {
     @Throws(ClassNotFoundException::class, InstantiationException::class, IllegalAccessException::class)
     fun threadPoolExecutor(properties: ThreadPoolConfigProperties): ThreadPoolExecutor {
         // 实例化策略
-        val handler = when (properties.policy) {
+        val handler = when (properties.POLICY) {
             "AbortPolicy" -> ThreadPoolExecutor.AbortPolicy()
             "DiscardPolicy" -> ThreadPoolExecutor.DiscardPolicy()
             "DiscardOldestPolicy" -> ThreadPoolExecutor.DiscardOldestPolicy()
@@ -30,11 +30,11 @@ class ThreadPoolConfig {
         }
         // 创建线程池
         return ThreadPoolExecutor(
-            properties.corePoolSize,
-            properties.maxPoolSize,
-            properties.keepAliveTime,
+            properties.CORE_POOL_SIZE,
+            properties.MAX_POOL_SIZE,
+            properties.KEEP_ALIVE_TIME,
             TimeUnit.SECONDS,
-            LinkedBlockingQueue<Runnable?>(properties.blockQueueSize),
+            LinkedBlockingQueue<Runnable?>(properties.BLOCK_QUEUE_SIZE),
             Executors.defaultThreadFactory(),
             handler
         )

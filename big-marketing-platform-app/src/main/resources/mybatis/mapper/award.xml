@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.nook.infrastructure.persistence.mapper.AwardMapper">
+
+    <!-- Result Map for Award entity -->
+    <resultMap id="AwardResultMap" type="org.nook.infrastructure.persistence.po.AwardPO">
+        <id property="id" column="id" />
+        <result property="awardId" column="award_id" />
+        <result property="awardKey" column="award_key" />
+        <result property="awardConfig" column="award_config" />
+        <result property="awardDesc" column="award_desc" />
+        <result property="createTime" column="create_time" />
+        <result property="updateTime" column="update_time" />
+    </resultMap>
+
+
+    <!-- Get 10  awards -->
+    <select id="get10Awards" resultMap="AwardResultMap">
+        SELECT *
+        FROM award
+        LIMIT 10
+    </select>
+
+
+
+
+</mapper>

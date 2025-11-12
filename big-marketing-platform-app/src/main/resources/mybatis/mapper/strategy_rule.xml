@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.nook.infrastructure.persistent.mapper.StrategyRuleMapper">
+<mapper namespace="org.nook.infrastructure.persistence.mapper.StrategyRuleMapper">
 
     <!-- Result Map for Award entity -->
-    <resultMap id="StrategyRuleResultMap" type="org.nook.infrastructure.persistent.po.StrategyRule">
+    <resultMap id="StrategyRuleResultMap" type="org.nook.infrastructure.persistence.po.StrategyRulePO">
         <id property="id" column="id" />
         <result property="strategyId" column="strategy_id" />
         <result property="awardId" column="award_id" />
@@ -15,7 +15,35 @@
         <result property="updateTime" column="update_time" />
     </resultMap>
 
+    <!-- 查询策略级规则（award_id = NULL, rule_type = 1）-->
+    <select id="getStrategyRuleByStrategyIdAndRuleModel" resultMap="StrategyRuleResultMap">
+        SELECT *
+        FROM strategy_rule
+        WHERE strategy_id = #{strategyId}
+          AND rule_model = #{ruleModel}
+          AND award_id IS NULL
+          AND rule_type = 1
+    </select>
 
+    <!-- 查询奖品级规则列表（award_id != NULL, rule_type = 2）-->
+    <select id="getStrategyRuleListByStrategyIdAndRuleModel" resultMap="StrategyRuleResultMap">
+        SELECT *
+        FROM strategy_rule
+        WHERE strategy_id = #{strategyId}
+          AND rule_model = #{ruleModel}
+          AND award_id IS NOT NULL
+          AND rule_type = 2
+        ORDER BY award_id
+    </select>
 
+    <!-- 查询特定奖品的规则配置 -->
+    <select id="getStrategyRuleByStrategyIdAndAwardIdAndRuleModel" resultMap="StrategyRuleResultMap">
+        SELECT *
+        FROM strategy_rule
+        WHERE strategy_id = #{strategyId}
+          AND award_id = #{awardId}
+          AND rule_model = #{ruleModel}
+          AND rule_type = 2
+    </select>
 
 </mapper>

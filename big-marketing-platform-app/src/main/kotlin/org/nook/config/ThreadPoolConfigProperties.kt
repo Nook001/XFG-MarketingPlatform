@@ -7,16 +7,16 @@ import org.springframework.boot.context.properties.ConfigurationProperties
 @ConfigurationProperties(prefix = "thread.pool.executor.config", ignoreInvalidFields = true)
 object ThreadPoolConfigProperties {
     /** 核心线程数  */
-    const val corePoolSize = 20
+    const val CORE_POOL_SIZE = 20
 
     /** 最大线程数  */
-    const val maxPoolSize = 200
+    const val MAX_POOL_SIZE = 200
 
     /** 最大等待时间  */
-    const val keepAliveTime = 10L
+    const val KEEP_ALIVE_TIME = 10L
 
     /** 最大队列数  */
-    const val blockQueueSize = 5000
+    const val BLOCK_QUEUE_SIZE = 5000
 
     /*
      * AbortPolicy：丢弃任务并抛出RejectedExecutionException异常。
@@ -24,5 +24,5 @@ object ThreadPoolConfigProperties {
      * DiscardOldestPolicy：将最早进入队列的任务删除，之后再尝试加入队列的任务被拒绝
      * CallerRunsPolicy：如果任务添加线程池失败，那么主线程自己执行该任务
      * */
-    const val policy = "AbortPolicy"
+    const val POLICY = "AbortPolicy"
 }
